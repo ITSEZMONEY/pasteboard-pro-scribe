@@ -8,23 +8,23 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    /* Pasteboard Pro Design System */
+    /* Pasteboard Pro Design System - All HSL colors */
     --background: 11 13 15; /* Deep carbon black */
-    --foreground: 229 229 235; /* Soft white text */
+    --foreground: 229 231 235; /* Soft white text */
 
     --card: 22 24 28; /* Elevated surface */
-    --card-foreground: 229 229 235;
+    --card-foreground: 229 231 235;
 
     --popover: 22 24 28;
-    --popover-foreground: 229 229 235;
+    --popover-foreground: 229 231 235;
 
     --primary: 127 90 240; /* Signature purple */
     --primary-foreground: 255 255 255;
 
-    --secondary: 28 30 34; /* Muted surface */
+    --secondary: 39 41 49; /* Muted surface */
     --secondary-foreground: 156 163 175;
 
-    --muted: 28 30 34;
+    --muted: 39 41 49;
     --muted-foreground: 156 163 175;
 
     --accent: 127 90 240; /* Brand accent */
@@ -40,19 +40,16 @@ All colors MUST be HSL.
     --radius: 1rem; /* Rounded corners */
 
     /* Pasteboard Pro specific tokens */
-    --glass-bg: 255 255 255 / 0.05; /* Glass background */
-    --glass-border: 255 255 255 / 0.1; /* Glass border */
     --surface: 22 24 28; /* Primary surface */
     --surface-elevated: 31 33 39; /* Elevated cards */
-    --tint: 127 90 240; /* Dynamic tint */
     
-    /* Gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(127 90% 240%), hsl(147 90% 240%));
-    --gradient-glass: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+    /* Glass effect colors */
+    --glass-bg: 255 255 255; /* White base for glass */
+    --glass-border: 255 255 255; /* White border for glass */
     
-    /* Shadows */
+    /* Gradients and effects */
     --shadow-glass: 0 8px 32px rgba(0, 0, 0, 0.3);
-    --shadow-glow: 0 0 40px hsl(var(--accent) / 0.3);
+    --shadow-glow: 0 0 40px hsl(127 90% 240% / 0.3);
     
     /* Animation curves */
     --ease-spring: cubic-bezier(0.36, 0.07, 0.19, 0.97);
@@ -126,10 +123,22 @@ All colors MUST be HSL.
   
   /* Glass morphism utilities */
   .glass {
-    background: rgba(var(--glass-bg));
+    background: rgba(255, 255, 255, 0.05);
     backdrop-filter: blur(24px) saturate(160%);
-    border: 1px solid rgba(var(--glass-border));
+    border: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: var(--shadow-glass);
+  }
+  
+  /* Button variants */
+  .btn-primary {
+    background: hsl(var(--accent));
+    color: hsl(var(--accent-foreground));
+    border: 1px solid hsl(var(--accent));
+  }
+  
+  .btn-primary:hover {
+    background: hsl(var(--accent) / 0.9);
+    box-shadow: var(--shadow-glow);
   }
   
   /* Smooth transitions */

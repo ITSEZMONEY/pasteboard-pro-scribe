@@ -62,12 +62,9 @@ export default {
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
 				},
-				// Pasteboard Pro specific colors
-				surface: 'hsl(var(--surface))',
-				'surface-elevated': 'hsl(var(--surface-elevated))',
-				'glass-bg': 'rgba(var(--glass-bg))',
-				'glass-border': 'rgba(var(--glass-border))',
-				tint: 'hsl(var(--tint))'
+				// Pasteboard Pro specific colors  
+				surface: 'hsl(22 24 28)',
+				'surface-elevated': 'hsl(31 33 39)'
 			},
 			borderRadius: {
 				lg: 'var(--radius)',

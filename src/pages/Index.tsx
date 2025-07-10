@@ -88,10 +88,9 @@ const Index = () => {
             >
               <button
                 onClick={() => setIsModalOpen(true)}
-                className="group relative px-8 py-4 bg-accent hover:bg-accent/90 text-accent-foreground rounded-xl font-semibold text-lg transition-all duration-300 hover:scale-105 hover:shadow-glow"
+                className="btn-primary group relative px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-300 hover:scale-105"
               >
                 <span className="relative z-10">Try Pasteboard Pro</span>
-                <div className="absolute inset-0 bg-gradient-to-r from-accent to-purple-500 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </button>
 
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4 text-sm text-muted-foreground">
@@ -195,7 +194,7 @@ const Index = () => {
               
               <button
                 onClick={() => setIsModalOpen(true)}
-                className="px-8 py-4 bg-accent hover:bg-accent/90 text-accent-foreground rounded-xl font-semibold text-lg transition-all duration-300 hover:scale-105 hover:shadow-glow"
+                className="btn-primary px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-300 hover:scale-105"
               >
                 Get Free Beta Access
               </button>

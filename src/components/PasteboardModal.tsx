@@ -218,7 +218,7 @@ export function PasteboardModal({ isOpen, onClose, initialText = '' }: Pasteboar
                           </button>
                           <button
                             onClick={handleCopy}
-                            className="flex items-center gap-2 px-4 py-2 bg-accent hover:bg-accent/90 text-accent-foreground rounded-lg transition-colors font-medium"
+                            className="btn-primary flex items-center gap-2 px-4 py-2 rounded-lg transition-colors font-medium"
                           >
                             <Copy className="w-4 h-4" />
                             Copy
