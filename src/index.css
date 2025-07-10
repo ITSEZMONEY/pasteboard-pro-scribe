@@ -8,35 +8,55 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Pasteboard Pro Design System */
+    --background: 11 13 15; /* Deep carbon black */
+    --foreground: 229 229 235; /* Soft white text */
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 22 24 28; /* Elevated surface */
+    --card-foreground: 229 229 235;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 22 24 28;
+    --popover-foreground: 229 229 235;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 127 90 240; /* Signature purple */
+    --primary-foreground: 255 255 255;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 28 30 34; /* Muted surface */
+    --secondary-foreground: 156 163 175;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 28 30 34;
+    --muted-foreground: 156 163 175;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 127 90 240; /* Brand accent */
+    --accent-foreground: 255 255 255;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 239 68 68;
+    --destructive-foreground: 255 255 255;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 39 41 49; /* Subtle borders */
+    --input: 39 41 49;
+    --ring: 127 90 240;
 
-    --radius: 0.5rem;
+    --radius: 1rem; /* Rounded corners */
+
+    /* Pasteboard Pro specific tokens */
+    --glass-bg: 255 255 255 / 0.05; /* Glass background */
+    --glass-border: 255 255 255 / 0.1; /* Glass border */
+    --surface: 22 24 28; /* Primary surface */
+    --surface-elevated: 31 33 39; /* Elevated cards */
+    --tint: 127 90 240; /* Dynamic tint */
+    
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(127 90% 240%), hsl(147 90% 240%));
+    --gradient-glass: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+    
+    /* Shadows */
+    --shadow-glass: 0 8px 32px rgba(0, 0, 0, 0.3);
+    --shadow-glow: 0 0 40px hsl(var(--accent) / 0.3);
+    
+    /* Animation curves */
+    --ease-spring: cubic-bezier(0.36, 0.07, 0.19, 0.97);
+    --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
 
     --sidebar-background: 0 0% 98%;
 
@@ -100,6 +120,31 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground antialiased;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  }
+  
+  /* Glass morphism utilities */
+  .glass {
+    background: rgba(var(--glass-bg));
+    backdrop-filter: blur(24px) saturate(160%);
+    border: 1px solid rgba(var(--glass-border));
+    box-shadow: var(--shadow-glass);
+  }
+  
+  /* Smooth transitions */
+  .transition-smooth {
+    transition: all 0.3s var(--ease-smooth);
+  }
+  
+  /* Spring animations */
+  .transition-spring {
+    transition: all 0.3s var(--ease-spring);
+  }
+  
+  /* Selection styling */
+  ::selection {
+    background: hsl(var(--accent) / 0.8);
+    color: hsl(var(--accent-foreground));
   }
 }
