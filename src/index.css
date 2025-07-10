@@ -131,13 +131,14 @@ All colors MUST be HSL.
   
   /* Button variants */
   .btn-primary {
-    background: hsl(var(--accent));
-    color: hsl(var(--accent-foreground));
-    border: 1px solid hsl(var(--accent));
+    background: hsl(var(--accent)) !important;
+    color: white !important;
+    border: 1px solid hsl(var(--accent)) !important;
   }
   
   .btn-primary:hover {
-    background: hsl(var(--accent) / 0.9);
+    background: hsl(var(--accent) / 0.9) !important;
+    color: white !important;
     box-shadow: var(--shadow-glow);
   }
   
