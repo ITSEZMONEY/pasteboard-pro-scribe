@@ -154,6 +154,7 @@ export function PasteboardModal({ isOpen, onClose, initialText = '' }: Pasteboar
                 <button
                   onClick={onClose}
                   className="p-2 hover:bg-white/10 rounded-lg transition-colors"
+                  aria-label="Close modal"
                 >
                   <X className="w-4 h-4" />
                 </button>
@@ -162,8 +163,9 @@ export function PasteboardModal({ isOpen, onClose, initialText = '' }: Pasteboar
               <div className="flex h-[600px]">
                 {/* Input Section */}
                 <div className="flex-1 p-6 border-r border-white/10">
-                  <h3 className="text-sm font-medium text-muted-foreground mb-3">Input</h3>
+                  <h3 id="input-heading" className="text-sm font-medium text-muted-foreground mb-3">Input</h3>
                   <textarea
+                    aria-labelledby="input-heading"
                     value={inputText}
                     onChange={(e) => setInputText(e.target.value)}
                     placeholder="Paste your text here or press Cmd+Shift+V to auto-load..."
@@ -213,6 +215,7 @@ export function PasteboardModal({ isOpen, onClose, initialText = '' }: Pasteboar
                             onClick={handleProcess}
                             className="p-2 bg-white/10 hover:bg-white/20 rounded-lg transition-colors"
                             title="Rerun"
+                            aria-label="Rerun processing"
                           >
                             <RotateCcw className="w-4 h-4" />
                           </button>
