@@ -31,13 +31,13 @@ export async function processWithClaude(action: ActionType, text: string): Promi
   // For demo purposes, if no API key is provided, return mock responses
   if (!CLAUDE_API_KEY || CLAUDE_API_KEY === '') {
     await new Promise(resolve => setTimeout(resolve, 1500)); // Simulate API delay
-    
+
     const mockResponses = {
       rephrase: `Here's a crisp, professional rewrite of your text: "${text.substring(0, 100)}..." → Polished and refined for maximum impact.`,
       summarize: `Key insight: ${text.split(' ').slice(0, 10).join(' ')}... (summarized for clarity)`,
       tweetify: `🚀 ${text.split(' ').slice(0, 8).join(' ')}... #productivity #flow`
     };
-    
+
     return mockResponses[action];
   }
 
@@ -67,7 +67,7 @@ export async function processWithClaude(action: ActionType, text: string): Promi
     }
 
     const data = await response.json();
-    
+
     if (!data.content || !data.content[0] || !data.content[0].text) {
       throw new Error('Invalid response format from Claude API');
     }
@@ -75,11 +75,11 @@ export async function processWithClaude(action: ActionType, text: string): Promi
     return data.content[0].text.trim();
   } catch (error) {
     console.error('Claude API error:', error);
-    
+
     if (error instanceof Error) {
       throw new Error(`Claude API failed: ${error.message}`);
     }
-    
+
     throw new Error('Failed to process text with Claude');
   }
 }
