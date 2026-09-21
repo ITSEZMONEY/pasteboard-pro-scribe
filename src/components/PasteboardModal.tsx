@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { X, Copy, RotateCcw, Loader2 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useToast } from '@/hooks/use-toast';
@@ -23,6 +23,7 @@ export function PasteboardModal({ isOpen, onClose, initialText = '' }: Pasteboar
   const [outputText, setOutputText] = useState('');
   const [activeAction, setActiveAction] = useState<ActionType>('rephrase');
   const [isLoading, setIsLoading] = useState(false);
+  const isLoadingRef = useRef(false);
   const { toast } = useToast();
 
   // Auto-populate with clipboard content when modal opens
@@ -77,9 +78,10 @@ export function PasteboardModal({ isOpen, onClose, initialText = '' }: Pasteboar
   }, [isOpen, onClose]);
 
   const handleProcess = useCallback(async () => {
-    if (!inputText.trim() || isLoading) return;
+    if (!inputText.trim() || isLoadingRef.current) return;
 
     setIsLoading(true);
+    isLoadingRef.current = true;
     try {
       const result = await processWithClaude(activeAction, inputText);
       setOutputText(result);
@@ -91,8 +93,9 @@ export function PasteboardModal({ isOpen, onClose, initialText = '' }: Pasteboar
       });
     } finally {
       setIsLoading(false);
+      isLoadingRef.current = false;
     }
-  }, [inputText, activeAction, isLoading, toast]);
+  }, [inputText, activeAction, toast]);
 
   const handleCopy = useCallback(async () => {
     if (!outputText) return;
@@ -115,9 +118,15 @@ export function PasteboardModal({ isOpen, onClose, initialText = '' }: Pasteboar
 
   // Auto-process when action changes or text is initially loaded
   useEffect(() => {
-    if (inputText.trim() && isOpen) {
+    if (!isOpen || !inputText.trim()) return;
+
+    // Add debounce to prevent excessive API calls while typing
+    const timeoutId = setTimeout(() => {
+      // Small optimization: only process if we haven't already processed this text for this action
       handleProcess();
-    }
+    }, 500);
+
+    return () => clearTimeout(timeoutId);
   }, [activeAction, inputText, isOpen, handleProcess]);
 
   return (

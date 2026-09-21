@@ -7,9 +7,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: |
-          curl https://cursor.com/install -fsS | bash
+          curl https://cursor.com/install -fsS > install-cursor.sh && bash install-cursor.sh
+          mkdir -p "$HOME/.cursor/bin"
+          ln -sf "$HOME/.local/bin/cursor-agent" "$HOME/.cursor/bin/cursor-agent" || true
           echo "$HOME/.cursor/bin" >> $GITHUB_PATH
       - run: |
-          cursor-agent -p "You are an automated code reviewer. Focus on security issues, logic bugs, missing tests, and code style. Provide detailed feedback on the PR changes." --model gpt-4
+          if [ -n "${CURSOR_API_KEY}" ]; then
+            cursor-agent -p "You are an automated code reviewer. Focus on security issues, logic bugs, missing tests, and code style. Provide detailed feedback on the PR changes." --model gpt-4
+          else
+            echo "Skipping review because CURSOR_API_KEY is not set (e.g. from a fork)."
+          fi
         env:
           CURSOR_API_KEY: ${{ secrets.CURSOR_API_KEY }}
